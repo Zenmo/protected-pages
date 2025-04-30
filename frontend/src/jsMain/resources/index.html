@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="module">
+            import { main, dispatch } from "./frontend.js"
+            window.dispatch = dispatch
+            main()
+        </script>
+    </head>
+    <body>
+        <div id="content">Waiting...</div>
+        <button onclick="dispatch('/public')">/public</button>
+        <button onclick="dispatch('/private')">/private</button>
+    </body>
+</html>
