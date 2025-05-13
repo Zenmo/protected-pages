@@ -15,6 +15,8 @@ function editConfig(config) {
     config.output.enabledLibraryTypes = ["module"]
     config.output.libraryTarget = "module"
     config.output.chunkFormat = "module"
+    // webpack seems unable to resolve [name] to something recognizable
+    config.output.chunkFilename = "[name].js"
 }
 
 editConfig(config)
