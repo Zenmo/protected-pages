@@ -1,9 +1,11 @@
+import com.github.gradle.node.npm.task.NpmTask
 import org.jetbrains.kotlin.gradle.dsl.JsModuleKind
 
 plugins {
     kotlin("multiplatform")
     // Apply Kotlin Serialization plugin from `gradle/libs.versions.toml`.
     alias(libs.plugins.kotlinPluginSerialization)
+    id("com.github.node-gradle.node") version "7.1.0"
 }
 
 kotlin {
@@ -14,7 +16,7 @@ kotlin {
 
     js {
         browser()
-        binaries.executable()
+        binaries.library()
         useEsModules()
         compilations.all {
             compileTaskProvider.configure {
@@ -34,4 +36,17 @@ kotlin {
             }
         }
     }
+}
+
+node {
+    nodeProjectDir = file("$projectDir/rollup")
+}
+
+tasks.register<NpmTask>("npmRollup") {
+    args = listOf("run", "rollup")
+    dependsOn("npmInstall", "jsBrowserProductionLibraryDistribution")
+}
+
+tasks.named<DefaultTask>("build") {
+    dependsOn("npmRollup")
 }
