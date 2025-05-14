@@ -6,6 +6,10 @@ plugins {
     application
 }
 
+kotlin {
+    jvmToolchain(23)
+}
+
 dependencies {
     implementation("org.graalvm.polyglot:js:24.2.1")
     implementation("org.graalvm.polyglot:polyglot:24.2.1")

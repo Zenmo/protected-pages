@@ -7,7 +7,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    kotlin("multiplatform") version "2.1.20" apply false
+    kotlin("multiplatform") version "2.1.21" apply false
     // Use the Foojay Toolchains plugin to automatically download JDKs required by subprojects.
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
