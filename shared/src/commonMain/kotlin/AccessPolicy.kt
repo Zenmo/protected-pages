@@ -12,8 +12,10 @@ private val format = Json { prettyPrint = true }
 @JsExport
 @Serializable
 sealed class AccessPolicy {
+    @Serializable
     class Public : AccessPolicy()
 
+    @Serializable
     class RoleBased(
         val requiredRole: String,
     ) : AccessPolicy()

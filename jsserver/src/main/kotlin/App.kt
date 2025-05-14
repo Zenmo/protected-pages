@@ -4,6 +4,8 @@ import org.http4k.core.HttpHandler
 import org.http4k.core.Request
 import org.http4k.core.Response
 import org.http4k.core.Status.Companion.NOT_FOUND
+import org.http4k.core.then
+import org.http4k.filter.DebuggingFilters
 import org.http4k.server.Undertow
 import org.http4k.server.asServer
 
@@ -13,7 +15,8 @@ fun main() {
 }
 
 fun startServer() {
-    val app: HttpHandler = { serveFiles(it) }
+    val app: HttpHandler = DebuggingFilters.PrintRequest()
+        .then { serveFiles(it) }
 
     val server = app.asServer(Undertow(9000)).start()
 
